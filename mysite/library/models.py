@@ -24,12 +24,14 @@ class Author(models.Model):
         verbose_name = "Autorius"
         verbose_name_plural = "Autoriai"
 
+    def display_books(self):
+        return ', '.join(book.title for book in self.books.all())
 
 class Book(models.Model):
     title = models.CharField(verbose_name="Pavadinimas", max_length=100)
     summary = models.TextField(verbose_name="Aprasymas")
     isbn = models.CharField(verbose_name="ISBN", max_length=13)
-    author = models.ForeignKey(to="Author", verbose_name="Autorius", on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey(to="Author", verbose_name="Autorius", on_delete=models.SET_NULL, null=True, blank=True, related_name='books')
     genre = models.ManyToManyField(to="Genre", verbose_name="Zanras")
 
     def __str__(self):
