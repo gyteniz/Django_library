@@ -1,8 +1,15 @@
 from django.contrib import admin
 from . import models
 
+class BooksInstanceInline(admin.TabularInline):
+    model = models.BookInstance
+    # readonly_fields = ('id',)
+    # can_delete = False
+    extra = 0
+
 class BookAdmin(admin.ModelAdmin):
     list_display = ['title', 'isbn', 'author', 'display_genre']
+    inlines = [BooksInstanceInline]
 
 class BookInstanceAdmin(admin.ModelAdmin):
     list_display = ['book', 'uuid', 'status', 'due_back']
