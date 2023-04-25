@@ -38,6 +38,12 @@ class Book(models.Model):
         verbose_name = "Knyga"
         verbose_name_plural = "Knygos"
 
+    def display_genre(self):
+        return ', '.join(genre.name for genre in self.genre.all())
+
+    display_genre.short_description = 'Žanras'
+
+
 class BookInstance(models.Model):
     book = models.ForeignKey(to="Book", verbose_name="Knyga", on_delete=models.CASCADE)
     uuid = models.UUIDField(default=uuid.uuid4)
