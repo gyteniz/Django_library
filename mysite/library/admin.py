@@ -10,11 +10,13 @@ class BooksInstanceInline(admin.TabularInline):
 class BookAdmin(admin.ModelAdmin):
     list_display = ['title', 'isbn', 'author', 'display_genre']
     inlines = [BooksInstanceInline]
+    search_fields = ['title', 'author__first_name', 'author__last_name']
 
 class BookInstanceAdmin(admin.ModelAdmin):
     list_display = ['book', 'uuid', 'status', 'due_back']
     list_filter = ['status', 'due_back', 'book']
-
+    list_editable = ['due_back', 'status']
+    search_fields = ['uuid', 'book__title']
 
     fieldsets = (
         ('General', {'fields': ('uuid', 'book')}),
