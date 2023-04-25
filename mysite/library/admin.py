@@ -3,8 +3,8 @@ from . import models
 
 class BooksInstanceInline(admin.TabularInline):
     model = models.BookInstance
-    # readonly_fields = ('id',)
-    # can_delete = False
+    readonly_fields = ['uuid']
+    can_delete = False
     extra = 0
 
 class BookAdmin(admin.ModelAdmin):
