@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+{% comment 'comment_name' %}
+Siaip komentaras.
+gtz
+{% endcomment %}
 <head>
     <title>{% block "title" %} {% endblock%}</title>
     <meta charset="utf-8">
@@ -40,9 +44,13 @@
 <div class="container mt-5">
     {% block "content" %} {% endblock%}
 </div>
+{% comment 'pasleptas' %}
+<div class="footer mt-5 p-4 bg-dark text-white text-center">
+    <p>©2023 gtz</p>
+</div>
+{% endcomment %}
 
-
-<div class="mt-5 p-4 bg-dark text-white text-center">
+<div class="footer mt-5 p-4 bg-dark text-white text-center">
     <p>©2023 gtz</p>
 </div>
 
