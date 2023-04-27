@@ -11,8 +11,10 @@
     </hr>
     </br>
     <h5>Mes turime šias {{ author.first_name }} {{ author.last_name }} knygas:</h5>
-    {% for i in author.books.all %}
-       <li>{{ i.title }}</li>
-    {% endfor %}
-    </div>
+    <ol>
+        {% for i in author.books.all %}
+        <li>{{ i.title }}</li>
+        {% endfor %}
+    </ol>
+</div>
 {% endblock %}

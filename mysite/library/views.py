@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Book, Author, BookInstance, Genre
 from django.shortcuts import render, get_object_or_404
+from django.views import generic
+
 
 # Create your views here.
 def index(request):
@@ -21,6 +23,7 @@ def index(request):
 
     return render(request, 'index.html', context=context)
 
+
 def authors(request):
     authors = Author.objects.all()
     context = {
@@ -35,3 +38,9 @@ def author(request, author_id):
         'author': author,
     }
     return render(request, 'author.html', context=context)
+
+
+class BookListView(generic.ListView):
+    model = Book
+    context_object_name = 'books'
+    template_name = "books.html"
