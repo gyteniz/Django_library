@@ -44,3 +44,7 @@ class BookListView(generic.ListView):
     model = Book
     context_object_name = 'books'
     template_name = "books.html"
+
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = 'book.html'
