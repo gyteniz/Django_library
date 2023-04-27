@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Book, Author, BookInstance, Genre
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 def index(request):
@@ -23,6 +24,14 @@ def index(request):
 def authors(request):
     authors = Author.objects.all()
     context = {
-        'authors':authors,
+        'authors': authors,
     }
     return render(request, 'authors.html', context=context)
+
+
+def author(request, author_id):
+    author = get_object_or_404(Author, pk=author_id)
+    context = {
+        'author': author,
+    }
+    return render(request, 'author.html', context=context)
