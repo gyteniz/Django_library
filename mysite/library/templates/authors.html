@@ -4,8 +4,11 @@
 
 
 {% block "content" %}
-{% for author in authors %}
+<h4>Autorių sąrašas</h4>
+<ul>
+    {% for author in authors %}
     <li><a href="{% url 'author' author.id %}">{{author.first_name}} {{author.last_name}}</a></li>
 
-{% endfor %}
+    {% endfor %}
+</ul>
 {% endblock %}
