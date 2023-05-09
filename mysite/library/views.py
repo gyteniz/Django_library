@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -71,3 +72,16 @@ class BookListView(generic.ListView):
 class BookDetailView(generic.DetailView):
     model = Book
     template_name = 'book.html'
+
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class MyBooksListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    template_name = 'my_books.html'
+    context_object_name = 'my_books'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(reader=self.request.user).filter(status__exact='p').order_by('due_back')

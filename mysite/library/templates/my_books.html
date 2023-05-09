@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block "content" %}
+    <h1>Mano paimtos knygos</h1>
+
+    {% if my_books %}
+    <ul>
+
+      {% for instance in my_books %}
+      <li class="{% if instance.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'book' instance.book.pk %}">{{instance.book.title}}</a> ({{ instance.due_back }})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>Šiuo metu iš mūsų nesate paėmę knygų.</p>
+    {% endif %}       
+{% endblock %}
