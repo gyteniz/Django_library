@@ -4,6 +4,7 @@ from .models import Book, Author, BookInstance, Genre
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 
 # Create your views here.
@@ -41,6 +42,22 @@ def author(request, author_id):
         'author': author,
     }
     return render(request, 'author.html', context=context)
+
+def search(request):
+    """
+    paprasta paieška. query ima informaciją iš paieškos laukelio,
+    search_results prafiltruoja pagal įvestą tekstą knygų pavadinimus ir aprašymus.
+    Icontains nuo contains skiriasi tuo, kad icontains ignoruoja ar raidės
+    didžiosios/mažosios.
+    """
+    query = request.GET.get('query')
+    search_results = Book.objects.filter(Q(title__icontains=query) | Q(summary__icontains=query) | Q(author__first_name__icontains=query) | Q(author__last_name__icontains=query))
+    context = {
+        'books': search_results,
+        'query': query,
+    }
+    return render(request, 'search.html', context=context)
+
 
 
 class BookListView(generic.ListView):
