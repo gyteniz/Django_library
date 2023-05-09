@@ -8,7 +8,7 @@ class BooksInstanceInline(admin.TabularInline):
     extra = 0
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['title', 'isbn', 'author', 'display_genre']
+    list_display = ['title', 'isbn', 'author', 'display_genre', 'cover']
     inlines = [BooksInstanceInline]
     search_fields = ['title', 'author__first_name', 'author__last_name']
 

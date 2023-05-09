@@ -4,7 +4,19 @@
 
 
 {% block "content" %}
-  <h4>{{ book.title }}</h4>
+
+
+
+{% load static %}
+{% if book.cover %}
+<div class="card mb-4 shadow-sm" style="max-width: 15rem;">
+    <img src="{{ book.cover.url }}" class="img" alt="...">
+    {% else %}
+    <img src="{% static 'img/no-image.png' %}" class="img">
+    {% endif %}
+</div>
+
+<h4>{{ book.title }}</h4>
 
   <p><strong>Autorius:</strong> <a href="{% url 'author' book.author.pk %}">{{ book.author }}</a></p>
   <p><strong>Aprašymas:</strong> {{ book.summary }}</p>
