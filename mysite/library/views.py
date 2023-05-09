@@ -42,6 +42,7 @@ def author(request, author_id):
 
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 3
     context_object_name = 'books'
     template_name = "books.html"
 
