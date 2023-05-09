@@ -8,7 +8,8 @@
 
       {% for instance in my_books %}
       <li class="{% if instance.is_overdue %}text-danger{% endif %}">
-        <a href="{% url 'book' instance.book.pk %}">{{instance.book.title}}</a> ({{ instance.due_back }})
+        <a href="{% url 'book' instance.book.pk %}">{{instance.book.title}}</a> {{ instance.book.author }}
+            ({{ instance.due_back }}, {{ instance.get_status_display }})
       </li>
       {% endfor %}
     </ul>
